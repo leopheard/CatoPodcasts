@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 URL1 = "https://www.cato.org/rss/multimedia/daily-podcast"
 URL2 = "https://www.cato.org/rss/multimedia/cato-audio"
 URL3 = "https://www.cato.org/rss/multimedia/events-podcast"
+URL4 = "https://www.libertarianism.org/rss/podcast/free-thoughts"
 
 def get_soup1(URL1):
     page = requests.get(URL1)
@@ -27,6 +28,13 @@ def get_soup3(URL3):
     return soup3
 get_soup3("https://www.cato.org/rss/multimedia/events-podcast")
 
+def get_soup4(URL4):
+    page = requests.get(URL4)
+    soup4 = BeautifulSoup(page.text, 'html.parser')
+    print("type: ", type(soup4))
+    return soup4
+get_soup4("https://www.libertarianism.org/rss/podcast/free-thoughts")
+
 
 def get_playable_podcast1(soup1):
     subjects = []
@@ -37,10 +45,6 @@ def get_playable_podcast1(soup1):
             print("\n\nLink: ", link)
             title = content.find('title')
             title = title.get_text()
-#            desc = content.find('description')
-#            desc = desc.get_text()
-#            thumbnail = content.find('itunes:image')
-#            thumbnail = desc.get_text('href')
         except AttributeError:
             continue
         item = {
@@ -80,10 +84,6 @@ def get_playable_podcast2(soup2):
             print("\n\nLink: ", link)
             title = content.find('title')
             title = title.get_text()
-#            desc = content.find('description')
-#            desc = desc.get_text()
-#            thumbnail = content.find('itunes:image')
-#            thumbnail = desc.get_text('href')
         except AttributeError:
             continue
         item = {
@@ -123,10 +123,6 @@ def get_playable_podcast3(soup3):
             print("\n\nLink: ", link)
             title = content.find('title')
             title = title.get_text()
-#            desc = content.find('description')
-#            desc = desc.get_text()
-#            thumbnail = content.find('itunes:image')
-#            thumbnail = desc.get_text('href')
         except AttributeError:
             continue
         item = {
@@ -144,6 +140,36 @@ def compile_playable_podcast3(playable_podcast3):
     items = []
 
     for podcast in playable_podcast3:
+        items.append({
+            'label': podcast['title'],
+            'thumbnail': podcast['thumbnail'],
+            'path': podcast['url'],
+#            'info': podcast['desc'],
+            'is_playable': True,
+    })
+    return items
+
+def get_playable_podcast4(soup4):
+    subjects = []
+    for content in soup4.find_all('item'):
+        try:        
+            link = content.find('enclosure')
+            link = link.get('url')
+            print("\n\nLink: ", link)
+            title = content.find('title')
+            title = title.get_text()
+        except AttributeError:
+            continue
+        item = {
+                'url': link,
+                'title': title,
+                'thumbnail': "https://www.libertarianism.org/sites/libertarianism.org/files/styles/optimize/public/feed-image/free-thoughts-min.png",
+        }
+        subjects.append(item) 
+    return subjects
+def compile_playable_podcast4(playable_podcast4):
+    items = []
+    for podcast in playable_podcast4:
         items.append({
             'label': podcast['title'],
             'thumbnail': podcast['thumbnail'],

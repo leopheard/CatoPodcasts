@@ -14,7 +14,7 @@
     <platform>all</platform>
     <language>en_us</language>
     <summary lang="en">Cato Podcasts</summary>
-    <description lang="en">The Cato Daily Podcast allows Cato Institute scholars and other commenters to discuss relevant news and libertarian thought in a conversational, informal manner. Hosted by Caleb O. Brown. Also feeds for the events and audio podcasts.</description>
+    <description lang="en">The Cato Daily Podcast allows Cato Institute scholars and other commenters to discuss relevant news and libertarian thought in a conversational, informal manner. Hosted by Caleb O. Brown. Also feeds for the events and audio podcasts and Free Thoughts</description>
     <license>The MIT License (MIT)</license>
     <forum></forum>
     <email>leopheard@gmail.com</email>
@@ -26,6 +26,7 @@
 			<screenshot>resources/media/1.png</screenshot>
 			<screenshot>resources/media/2.jpg</screenshot>
 			<screenshot>resources/media/3.jpg</screenshot>
+			<screenshot>resources/media/4.jpg</screenshot>
 		</assets>
   </extension>
 </addon>
